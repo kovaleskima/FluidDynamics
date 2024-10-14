@@ -1,0 +1,7 @@
+﻿V (L),T (s),Pressure difference (m),Observations
+0,0,0.002," Pipe at standstill"
+0.230,60,0.003,mostly laminar
+0.225,30,0.005,"some turbulence, diffuses quickly"
+0.400,15,0.015,"much turbulence, holding together slightly"
+0.650,15,0.020,"a lot of turbulence past boundary layer"
+0.700,10,0.060,"turbulence even at boundary layer"

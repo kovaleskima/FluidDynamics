@@ -43,7 +43,8 @@ df['E(x)'] = rho*g*df['y'] + 0.5*rho*(df['U(x)']**2) #Joules per m^3
 
 # import Q, H1, H2 and convert to SI units
 df = pd.read_csv("./lab3heights.csv")
-df['Q'] = (1e-6)*df['Q']
+df = df.sort_values(by='Q')
+df['Q'] = (1e-6)*df['Q'] #normalize by width so that we match our derived equation
 df['H1'] = 0.001*df['H1']
 df['H2'] = 0.001*df['H2']
 
@@ -51,9 +52,16 @@ df['H2'] = 0.001*df['H2']
 df.insert(3, 'H2/H1', 0)
 df['H2/H1'] = df['H2']/df['H1']
 
-df.insert(4, 'Fr^2', 0)
-df['Fr^2'] = (df['Q']**2)/(g*(df['H1']**3))
+# We will use our collected H1 values
+frsquared = ((df['Q']/width)**2)/(g*(df['H1']**3))
+y = 0.5*(-1+np.sqrt(1+8*frsquared))
 
-df.insert(5, 'Predicted H2/H1', 0)
-df['Predicted H2/H1'] = 0.5*(-1+np.sqrt(1+8*df['Fr^2']))
-print(df)
+# Plot the curve over the scatter plot
+plt.scatter(df['Q'], df['H2/H1'], label=f'Observed H2/H1')
+plt.scatter(df['Q'], y, color='r', label=f'Predicted H2/H1', linewidth=2)
+
+plt.xlabel('Q (m^3/s)')
+plt.ylabel('Predicted and Observed Height Ratios')
+plt.legend(loc='upper right')  # Show the legend for all functions
+plt.grid(True)
+plt.show()

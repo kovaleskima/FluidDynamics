@@ -124,7 +124,7 @@ class Field:
         self.move_centers(dt)
 
 # Set up the grid for the vector field
-vortex1 = Vortex(1, 20, 20)
+vortex1 = Vortex(1, 15, 20)
 vortex2 = Vortex(-1, 30, 20)
 vortex3 = Vortex(-1, 20, 30)
 vortex4 = Vortex(1, 30, 30)
@@ -141,7 +141,7 @@ ax.set_xlim(-1, 51)
 ax.set_ylim(-1, 51)
 ax.set_title("Animation")
 mesh_x, mesh_y = np.mgrid[:len(field.x), :len(field.x[0])]
-quiver = ax.quiver(mesh_x, mesh_y, U, V, norm, cmap='nipy_spectral', scale=100, width=0.002 )
+quiver = ax.quiver(mesh_x, mesh_y, U, V, norm, cmap='nipy_spectral', scale=50, width=0.002 )
 
 # Add a colorbar to show the scale of magnitudes
 cbar = fig.colorbar(quiver, ax=ax)
@@ -161,5 +161,5 @@ def animate(frame):
     
     return quiver, scatter
 
-ani = animation.FuncAnimation(fig, animate, frames=range(100), interval=100, blit=False, cache_frame_data=False, repeat=True)
+ani = animation.FuncAnimation(fig, animate, frames=range(100), interval=1, blit=False, cache_frame_data=False, repeat=True)
 plt.show()
